@@ -55,7 +55,7 @@ def update
     SET name = ?,age = ?
     WHERE id = ?
     SQL
-    DB[:conn].execute(sql,self.name,self.age,self.last_insert_rowid)
+    DB[:conn].execute(sql,self.name,self.age,self.id)
     
 end
 # TODO: DELETE RECORD
