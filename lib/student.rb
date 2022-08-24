@@ -40,14 +40,14 @@ def self.all
 end
 # SHOW PREVIOUSLY ADDED
 
-def show_most_recent
-    sql = <<-SQL
-    SELECT * FROM students ORDER BY id DESC LIMIT 1 
-    SQL
-    DB[:conn].execute(query)map do |row|
-        Student.object_from_db(row)
-    end.first
-end
+# def show_most_recent
+#     sql = <<-SQL
+#     SELECT * FROM students ORDER BY id DESC LIMIT 1 
+#     SQL
+#     DB[:conn].execute(query)map do |row|
+#         Student.object_from_db(row)
+#     end.first
+# end
 # TODO: UPDATE RECORD
 def update
     sql = <<-SQL
@@ -68,7 +68,7 @@ def delete
 end
 # TODO: CONVERT TABLE RECORD TO RUBY OBJECT-class
 def self.object_from_db(row)
-    self.new(id:[0],name:row[1],age:row[2])
+    self.new(id:row[0],name:row[1],age:row[2])
 end
 
 # TODO: SEARCH FOR RECORD THAT MEETS CERTAIN CONDITIONS -OLDEST
@@ -79,15 +79,13 @@ def self.find_oldest
     DB[:conn].execute(sql).map do |row|
         self.object_from_db(row)
     end.first
-
-    
 end
 
 private
 
 def set_id
-    sql = "SELECT last_insert_rowid() FROM students"
-    self.id = DB[:conn].execute(sql)[0][0]
-end
+    query = "SELECT last_insert_rowid() FROM students"
+    @id = DB[:conn].execute(query)[0][0]
+  end
 
 end

@@ -7,22 +7,22 @@ DB = { conn: SQLite3::Database.new("db/school.db") }
 
 # RUN CODE FROM HERE
 
+# CREATE TABLE
 Student.create_table
 
-kelvin = Student.new(name:"Kelvin",age:22)
-# add student
-kelvin.add_to_db
-pp Student.all
-kelvin.name = "Kevoh"
-kelvin.age = 24
-kelvin.update
-
+# Create a new student
+esther = Student.new(name: "Esther", age: 18)
+# add student to database
+esther.add_to_db
 pp Student.all
 
-kelvin.name = "water loo"
-kelvin.age= 19
-kelvin.add_to_db
+esther.name = "Water Bottle"
+esther.age = 2
+esther.update
 
 pp Student.all
 
-kelvin.delete
+esther.delete
+
+pp Student.all
+esther.delete
